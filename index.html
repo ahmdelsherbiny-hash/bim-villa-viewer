@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIM 3D Villa Viewer | Interactive Architectural Visualization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 3D WebGL Canvas Container -->
+      <div id="canvas-container"></div>
+
+      <!-- BIM Viewer Header Bar -->
+      <header id="viewer-header">
+        <div class="header-left">
+          <div class="logo-badge">
+            <svg class="icon-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span class="brand-text">BIM<span class="brand-accent">Arch</span></span>
+          </div>
+          <div class="project-info">
+            <span class="project-title">Modern Residence Villa (Phase 1)</span>
+            <span class="project-tag">LOD 300 &bull; Architectural Model</span>
+          </div>
+        </div>
+
+        <div class="header-center">
+          <!-- Camera Presets -->
+          <div class="control-group">
+            <button class="nav-btn active" data-view="perspective" title="3/4 Perspective View">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              <span>Perspective</span>
+            </button>
+            <button class="nav-btn" data-view="front" title="Front Elevation">Front</button>
+            <button class="nav-btn" data-view="back" title="Rear Elevation">Rear</button>
+            <button class="nav-btn" data-view="left" title="Left Elevation">Left</button>
+            <button class="nav-btn" data-view="right" title="Right Elevation">Right</button>
+            <button class="nav-btn" data-view="top" title="Top Plan View">Top Plan</button>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button id="btn-reset-cam" class="action-btn" title="Reset Camera to Home View">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span>Reset View</span>
+          </button>
+          <button id="btn-toggle-grid" class="action-btn" title="Toggle Construction Grid">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            <span>Grid</span>
+          </button>
+          <div class="fps-badge" id="fps-counter">60 FPS</div>
+        </div>
+      </header>
+
+      <!-- Navigation Tips Overlay (bottom-left) -->
+      <div id="nav-hints">
+        <div class="hint-row">
+          <kbd>Left Click + Drag</kbd>
+          <span>Rotate Orbit</span>
+        </div>
+        <div class="hint-row">
+          <kbd>Right Click + Drag</kbd>
+          <span>Pan Camera</span>
+        </div>
+        <div class="hint-row">
+          <kbd>Scroll Wheel</kbd>
+          <span>Zoom In / Out</span>
+        </div>
+        <div class="hint-row">
+          <kbd>R</kbd>
+          <span>Reset Camera</span>
+        </div>
+      </div>
+
+      <!-- Quick Metrics HUD (bottom-right) -->
+      <div id="metrics-hud">
+        <div class="metric-item">
+          <span class="metric-label">Gross Floor Area</span>
+          <span class="metric-value">385 m&sup2;</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-label">Levels</span>
+          <span class="metric-value">2 Stories + Roof</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-label">Coordinates</span>
+          <span class="metric-value" id="camera-coords">X: 25.0 Y: 18.0 Z: 28.0</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
